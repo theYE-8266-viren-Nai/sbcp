@@ -1,7 +1,13 @@
-export default function App() {
+import React from 'react';
+import AuthPage from './pages/AuthPage';
+import './index.css';
+
+function App() {
   return (
-    <div>
-      <h1 className=" text-green-400 text text">Hello</h1>
+    <div className="App">
+      <AuthPage />
     </div>
-  )
+  );
 }
+
+export default App;
