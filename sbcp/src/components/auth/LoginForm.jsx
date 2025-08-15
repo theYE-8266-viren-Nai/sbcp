@@ -1,10 +1,13 @@
+
 import React, { useState } from 'react';
 import { Mail, Lock, Eye, EyeOff, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import Input from '../ui/Input';
 import Button from '../ui/Button';
-import { authService } from '../../services/authservice';
+import { authService } from '../../services/authService'; // 🎯 Fixed import (authService not authservice)
 
 const LoginForm = ({ onToggleMode }) => {
+  const navigate = useNavigate(); // 🎯 Added navigation hook
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -35,12 +38,8 @@ const LoginForm = ({ onToggleMode }) => {
       const response = await authService.login(formData);
       console.log('Login successful:', response);
       
-      // Show success message
-      alert('Login successful! Welcome back.');
-      
-      // Redirect to dashboard or home page
-      // You can replace this with your routing logic
-      window.location.href = '/dashboard';
+      // 🎯 Updated: Use React Router navigation instead of window.location
+      navigate('/'); // Navigate to index page
       
     } catch (error) {
       console.error('Login error:', error);

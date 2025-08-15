@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Mail, Lock, User, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import Input from '../ui/Input';
 import Button from '../ui/Button';
-import { authService } from '../../services/authservice';
+import { authService } from '../../services/authService'; // 🎯 Fixed import (authService not authservice)
 
 const SignupForm = ({ onToggleMode }) => {
+  const navigate = useNavigate(); // 🎯 Added navigation hook
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -67,11 +69,8 @@ const SignupForm = ({ onToggleMode }) => {
       
       console.log('Registration successful:', response);
       
-      // Show success message
-      alert('Registration successful! Welcome to our platform.');
-      
-      // Redirect to dashboard or home page
-      window.location.href = '/dashboard';
+      // 🎯 Updated: Use React Router navigation instead of window.location
+      navigate('/'); // Navigate to index page
       
     } catch (error) {
       console.error('Registration error:', error);
