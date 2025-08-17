@@ -1,70 +1,93 @@
+
 import React from 'react';
-import { Shield, Zap, Globe } from 'lucide-react';
+import { Shield, Zap, Users, Heart, BookOpen, MessageCircle } from 'lucide-react';
 
 const FeatureSection = () => {
   const features = [
     {
-      icon: <Shield className="w-6 h-6" />,
-      title: "Secure Authentication",
-      description: "End-to-end encryption with industry-standard security protocols"
+      icon: <Users className="w-6 h-6" />,
+      title: "Connect with Students",
+      description: "Build meaningful connections with fellow students from around the world"
+    },
+    {
+      icon: <BookOpen className="w-6 h-6" />,
+      title: "Share Knowledge",
+      description: "Create and discover study materials, notes, and academic resources"
+    },
+    {
+      icon: <MessageCircle className="w-6 h-6" />,
+      title: "Study Groups",
+      description: "Join or create study groups for collaborative learning experiences"
+    },
+    {
+      icon: <Heart className="w-6 h-6" />,
+      title: "Safe Community",
+      description: "Academic-focused environment with verified student profiles"
     },
     {
       icon: <Zap className="w-6 h-6" />,
-      title: "Lightning Fast",
-      description: "Optimized performance with instant load times and smooth interactions"
+      title: "Real-time Updates",
+      description: "Get instant notifications about study sessions and group activities"
     },
     {
-      icon: <Globe className="w-6 h-6" />,
-      title: "Global Access",
-      description: "Access your account from anywhere in the world, anytime"
+      icon: <Shield className="w-6 h-6" />,
+      title: "Secure Platform",
+      description: "Your data is protected with enterprise-grade security measures"
     }
   ];
 
   return (
-    <>
-      {/* Desktop Features */}
-      <div className="hidden space-y-8 text-white lg:block">
-        <div className="space-y-4">
-          <h1 className="text-5xl font-bold text-transparent bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text">
-            Welcome to the Future
-          </h1>
-          <p className="text-xl leading-relaxed text-slate-300">
-            Experience next-generation authentication with cutting-edge security and seamless user experience.
-          </p>
-        </div>
-
-        <div className="space-y-6">
-          {features.map((feature, index) => (
-            <div key={index} className="flex items-start space-x-4 transition-transform duration-300 group hover:translate-x-2">
-              <div className="flex items-center justify-center flex-shrink-0 w-12 h-12 text-white transition-all duration-300 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 group-hover:shadow-lg group-hover:shadow-purple-500/25">
-                {feature.icon}
-              </div>
-              <div>
-                <h3 className="mb-1 text-lg font-semibold">{feature.title}</h3>
-                <p className="text-slate-400">{feature.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+    <div className="space-y-8">
+      {/* Main Header */}
+      <div className="space-y-6">
+        <h1 className="text-5xl font-bold leading-tight text-brand-600">
+          Welcome to your
+          <span className="block text-transparent bg-gradient-to-r from-brand-400 to-brand-500 bg-clip-text">
+            Student Community
+          </span>
+        </h1>
+        <p className="text-xl leading-relaxed text-brand-500/80">
+          Connect, collaborate, and succeed together. Join thousands of students 
+          sharing knowledge and building their academic future.
+        </p>
       </div>
 
-      {/* Mobile Features - This would be rendered in AuthLayout after the form */}
-      <div className="grid grid-cols-1 gap-4 mt-8 lg:hidden">
+      {/* Features Grid - Pinterest style cards */}
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
         {features.map((feature, index) => (
-          <div key={index} className="p-4 border bg-white/5 backdrop-blur-sm rounded-xl border-white/10">
-            <div className="flex items-center space-x-3">
-              <div className="flex items-center justify-center w-10 h-10 text-white rounded-lg bg-gradient-to-r from-blue-500 to-purple-500">
+          <div 
+            key={index} 
+            className="p-6 transition-all duration-300 border group bg-white/80 backdrop-blur-sm rounded-pinterest shadow-pinterest hover:shadow-pinterest-hover hover:scale-105 border-brand-200/30"
+          >
+            <div className="flex items-start space-x-4">
+              <div className="flex items-center justify-center flex-shrink-0 w-12 h-12 text-white transition-transform duration-300 shadow-lg bg-gradient-to-br from-brand-400 to-brand-500 rounded-xl group-hover:scale-110">
                 {feature.icon}
               </div>
-              <div>
-                <h3 className="font-semibold text-white">{feature.title}</h3>
-                <p className="text-sm text-slate-400">{feature.description}</p>
+              <div className="flex-1">
+                <h3 className="mb-2 font-semibold transition-colors text-brand-600 group-hover:text-brand-500">
+                  {feature.title}
+                </h3>
+                <p className="text-sm leading-relaxed text-brand-500/70">
+                  {feature.description}
+                </p>
               </div>
             </div>
           </div>
         ))}
       </div>
-    </>
+
+      {/* Bottom CTA */}
+      <div className="pt-6 text-center">
+        <div className="inline-flex items-center space-x-2 text-brand-500/60">
+          <div className="flex -space-x-2">
+            <div className="w-8 h-8 border-2 border-white rounded-full bg-gradient-to-br from-brand-300 to-brand-400"></div>
+            <div className="w-8 h-8 border-2 border-white rounded-full bg-gradient-to-br from-brand-400 to-brand-500"></div>
+            <div className="w-8 h-8 border-2 border-white rounded-full bg-gradient-to-br from-brand-500 to-brand-600"></div>
+          </div>
+          <span className="text-sm font-medium">Join 10,000+ students already connected</span>
+        </div>
+      </div>
+    </div>
   );
 };
 

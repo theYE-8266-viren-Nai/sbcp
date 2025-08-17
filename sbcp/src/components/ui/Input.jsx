@@ -1,40 +1,58 @@
 import React from 'react';
 
-const Input = ({ 
-  label, 
-  type = 'text', 
-  name, 
-  value, 
-  onChange, 
-  placeholder, 
-  required = false,
+const Input = ({
+  label,
+  type = 'text',
+  name,
+  value,
+  onChange,
+  placeholder,
   icon: Icon,
   rightIcon: RightIcon,
-  onRightIconClick
+  onRightIconClick,
+  required = false,
+  className = ''
 }) => {
   return (
-    <div>
-      <label className="block mb-2 text-sm font-medium text-slate-300">
-        {label}
-      </label>
+    <div className={`space-y-2 ${className}`}>
+      {label && (
+        <label className="block text-sm font-medium text-brand-600">
+          {label}
+          {required && <span className="ml-1 text-pinterest-red">*</span>}
+        </label>
+      )}
       <div className="relative">
         {Icon && (
-          <Icon className="absolute w-5 h-5 transform -translate-y-1/2 left-3 top-1/2 text-slate-400" />
+          <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+            <Icon className="w-5 h-5 text-brand-500/50" />
+          </div>
         )}
         <input
           type={type}
           name={name}
           value={value}
           onChange={onChange}
-          className={`w-full ${Icon ? 'pl-12' : 'pl-4'} ${RightIcon ? 'pr-12' : 'pr-4'} py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300`}
           placeholder={placeholder}
           required={required}
+          className={`
+            w-full px-4 py-3 
+            ${Icon ? 'pl-12' : 'pl-4'} 
+            ${RightIcon ? 'pr-12' : 'pr-4'}
+            bg-white/80 backdrop-blur-sm
+            border border-brand-300 
+            rounded-pinterest 
+            text-brand-600 
+            placeholder-brand-500/50
+            focus:ring-2 focus:ring-brand-400 focus:border-brand-400 
+            transition-all duration-200
+            hover:bg-white/90
+          `}
         />
         {RightIcon && (
           <button
             type="button"
             onClick={onRightIconClick}
-            className="absolute transition-colors transform -translate-y-1/2 right-3 top-1/2 text-slate-400 hover:text-white"
+            className="absolute inset-y-0 right-0 flex items-center pr-4 transition-colors text-brand-500/50 hover:text-brand-500"
           >
             <RightIcon className="w-5 h-5" />
           </button>
