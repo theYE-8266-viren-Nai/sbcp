@@ -1,26 +1,30 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import AuthLayout from './components/auth/AuthLayout';
-import Index from './pages/Index';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ProtectedRoute from './components/route/ProtectedRoute';
 import PublicRoute from './components/route/PublicRoute';
+
+// Pages
+import Index from './pages/Index';
+import AuthPage from './pages/AuthPage';
+import PostsGrid from './components/post/PostsGrid';
+import StudyGroupsGrid from './components/groups/StudyGroupsGrid';
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Routes>
-          {/* Public Routes - Only accessible when NOT logged in */}
+          {/* Public Routes */}
           <Route 
             path="/auth" 
             element={
               <PublicRoute>
-                <AuthLayout />
+                <AuthPage />
               </PublicRoute>
             } 
           />
-          
-          {/* Protected Routes - Only accessible when logged in */}
+
+          {/* Protected Routes */}
           <Route 
             path="/" 
             element={
@@ -30,8 +34,26 @@ function App() {
             } 
           />
           
+          <Route 
+            path="/posts" 
+            element={
+              <ProtectedRoute>
+                <PostsGrid />
+              </ProtectedRoute>
+            } 
+          />
+          
+          <Route 
+            path="/groups" 
+            element={
+              <ProtectedRoute>
+                <StudyGroupsGrid />
+              </ProtectedRoute>
+            } 
+          />
+
           {/* Redirect any unknown routes to home */}
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<Index />} />
         </Routes>
       </div>
     </Router>
