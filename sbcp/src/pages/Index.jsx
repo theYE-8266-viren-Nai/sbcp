@@ -4,22 +4,11 @@ import { authService } from '../services/authService';
 import { apiService } from '../services/apiService';
 import PostCard from '../components/post/PostCard';
 import CreatePostModal from '../components/post/CreatePostModal';
+import Navigation from '../components/common/Navigation';
 import { 
-  LogOut, 
-  User, 
-  Home, 
-  Search, 
   Plus, 
   BookOpen,
-  Users,
-  MessageCircle,
-  Bell,
-  Settings,
-  Heart,
-  Share,
-  Bookmark,
-  MoreHorizontal,
-  TrendingUp
+  Users
 } from 'lucide-react';
 
 const Index = () => {
@@ -40,31 +29,17 @@ const Index = () => {
   const loadDashboardData = async () => {
     setLoading(true);
     try {
-      // Load recent posts and groups for dashboard
       const [postsData, groupsData] = await Promise.all([
         apiService.posts.getAll(),
         apiService.groups.getAll()
       ]);
       
-      // Show only first 6 posts and 4 groups on dashboard
       setPosts(postsData.slice(0, 6));
       setGroups(groupsData.slice(0, 4));
     } catch (error) {
       console.error('Error loading dashboard data:', error);
     } finally {
       setLoading(false);
-    }
-  };
-
-  const handleLogout = () => {
-    authService.logout();
-    window.location.href = '/auth';
-  };
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      navigate(`/posts?search=${encodeURIComponent(searchQuery.trim())}`);
     }
   };
 
@@ -78,99 +53,14 @@ const Index = () => {
     ));
   };
 
-  const categories = [
-    { name: 'All', count: posts.length },
-    { name: 'Mathematics', count: posts.filter(p => p.category === 'Mathematics').length },
-    { name: 'Programming', count: posts.filter(p => p.category === 'Programming').length },
-    { name: 'Biology', count: posts.filter(p => p.category === 'Biology').length },
-    { name: 'Physics', count: posts.filter(p => p.category === 'Physics').length },
-    { name: 'Writing', count: posts.filter(p => p.category === 'Writing').length },
-  ];
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-brand-50 via-brand-100 to-brand-200 font-pinterest">
-      {/* Navigation Header */}
-      <nav className="sticky top-0 z-50 border-b bg-white/90 backdrop-blur-xl border-brand-200/30 shadow-pinterest">
-        <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            
-            {/* Logo */}
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-3">
-                <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-brand-400 to-brand-500 rounded-pinterest">
-                  <BookOpen className="w-6 h-6 text-white" />
-                </div>
-                <span className="text-xl font-bold text-brand-600">StudyHub</span>
-              </div>
-            </div>
-
-            {/* Navigation Links */}
-            <div className="items-center hidden space-x-6 md:flex">
-              <button 
-                onClick={() => navigate('/')}
-                className="flex items-center px-4 py-2 space-x-2 transition-colors text-brand-600 hover:bg-brand-100 rounded-pinterest"
-              >
-                <Home className="w-4 h-4" />
-                <span className="font-medium">Home</span>
-              </button>
-              <button 
-                onClick={() => navigate('/posts')}
-                className="flex items-center px-4 py-2 space-x-2 transition-colors text-brand-600 hover:bg-brand-100 rounded-pinterest"
-              >
-                <BookOpen className="w-4 h-4" />
-                <span className="font-medium">Posts</span>
-              </button>
-              <button 
-                onClick={() => navigate('/groups')}
-                className="flex items-center px-4 py-2 space-x-2 transition-colors text-brand-600 hover:bg-brand-100 rounded-pinterest"
-              >
-                <Users className="w-4 h-4" />
-                <span className="font-medium">Groups</span>
-              </button>
-            </div>
-
-            {/* Search Bar */}
-            <div className="flex-1 max-w-2xl mx-8">
-              <form onSubmit={handleSearch}>
-                <div className="relative">
-                  <Search className="absolute w-5 h-5 transform -translate-y-1/2 left-4 top-1/2 text-brand-500/50" />
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search for study materials, notes, groups..."
-                    className="w-full py-3 pl-12 pr-4 transition-all border bg-brand-100/50 border-brand-200 rounded-pinterest-lg text-brand-600 placeholder-brand-500/50 focus:ring-2 focus:ring-brand-400 focus:border-brand-400"
-                  />
-                </div>
-              </form>
-            </div>
-
-            {/* User Actions */}
-            <div className="flex items-center space-x-4">
-              <button className="p-2 transition-colors text-brand-500 hover:bg-brand-100 rounded-pinterest">
-                <Bell className="w-6 h-6" />
-              </button>
-              <button className="p-2 transition-colors text-brand-500 hover:bg-brand-100 rounded-pinterest">
-                <MessageCircle className="w-6 h-6" />
-              </button>
-              
-              {/* User Menu */}
-              <div className="flex items-center space-x-3">
-                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-brand-300 to-brand-400">
-                  <User className="w-5 h-5 text-white" />
-                </div>
-                <button
-                  onClick={handleLogout}
-                  className="flex items-center px-4 py-2 space-x-2 transition-colors text-brand-500 hover:bg-brand-100 rounded-pinterest"
-                >
-                  <LogOut className="w-4 h-4" />
-                  <span className="text-sm font-medium">Logout</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
+      {/* Navigation */}
+      <Navigation 
+        onCreatePost={() => setIsCreatePostModalOpen(true)}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+      />
 
       {/* Main Content */}
       <div className="px-4 py-8 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -189,7 +79,7 @@ const Index = () => {
               </div>
               <button 
                 onClick={() => setIsCreatePostModalOpen(true)}
-                className="flex items-center px-6 py-3 space-x-2 text-white transition-all bg-gradient-to-r from-brand-400 to-brand-500 rounded-pinterest shadow-pinterest hover:shadow-pinterest-hover hover:scale-105"
+                className="items-center hidden px-6 py-3 space-x-2 text-white transition-all sm:flex bg-gradient-to-r from-brand-400 to-brand-500 rounded-pinterest shadow-pinterest hover:shadow-pinterest-hover hover:scale-105"
               >
                 <Plus className="w-5 h-5" />
                 <span className="font-medium">Create Post</span>
@@ -334,14 +224,6 @@ const Index = () => {
           )}
         </div>
       </div>
-
-      {/* Floating Action Button */}
-      <button 
-        onClick={() => setIsCreatePostModalOpen(true)}
-        className="fixed z-50 flex items-center justify-center w-16 h-16 text-white transition-all rounded-full bottom-8 right-8 bg-gradient-to-r from-brand-400 to-brand-500 shadow-pinterest-lg hover:shadow-pinterest-hover hover:scale-110"
-      >
-        <Plus className="w-8 h-8" />
-      </button>
 
       {/* Create Post Modal */}
       <CreatePostModal 

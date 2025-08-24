@@ -1,4 +1,3 @@
-
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -33,6 +32,8 @@ export default {
       },
       fontFamily: {
         'pinterest': ['Inter', 'system-ui', 'sans-serif'],
+        'display': ['Playfair Display', 'serif'],
+        'playfair': ['Playfair Display', 'serif'],
       },
       borderRadius: {
         'pinterest': '16px',

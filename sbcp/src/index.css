@@ -1,3 +1,78 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+/* Default font for all elements - Libre Franklin */
+* {
+  font-family: 'Libre Franklin', system-ui, sans-serif;
+}
+
+/* Headers use Playfair Display for elegance */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600; /* Default semibold for headers */
+}
+
+/* Body text elements use Libre Franklin for readability */
+body, p, span, div, a, button, input, textarea, label, li, td, th {
+  font-family: 'Libre Franklin', system-ui, sans-serif;
+}
+
+/* Specific header styling */
+h1 {
+  font-weight: 700; /* Bold */
+  font-size: 2.25rem; /* text-4xl equivalent */
+}
+
+h2 {
+  font-weight: 600; /* Semibold */
+  font-size: 1.875rem; /* text-3xl equivalent */
+}
+
+h3 {
+  font-weight: 600; /* Semibold */
+  font-size: 1.5rem; /* text-2xl equivalent */
+}
+
+h4 {
+  font-weight: 500; /* Medium */
+  font-size: 1.25rem; /* text-xl equivalent */
+}
+
+h5 {
+  font-weight: 500; /* Medium */
+  font-size: 1.125rem; /* text-lg equivalent */
+}
+
+h6 {
+  font-weight: 500; /* Medium */
+  font-size: 1rem; /* text-base equivalent */
+}
+
+/* Body text styling */
+body {
+  font-weight: 400; /* Normal */
+  line-height: 1.6;
+}
+
+p {
+  font-weight: 400; /* Normal */
+  line-height: 1.6;
+}
+
+/* Button styling */
+button {
+  font-weight: 500; /* Medium weight for better readability */
+}
+
+/* Input and form elements */
+input, textarea, select {
+  font-weight: 400; /* Normal */
+}
+
+/* Links */
+a {
+  font-weight: 500; /* Slightly bolder for links */
+}
