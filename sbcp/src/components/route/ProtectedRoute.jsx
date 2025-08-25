@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { authService } from '../../services/authservice'; // 🎯 Fixed import (authService not authservice)
+import { authService } from '../../services/authService'; // Fixed import casing for consistency
 
 const ProtectedRoute = ({ children }) => {
   const isAuthenticated = authService.isAuthenticated();

@@ -8,7 +8,9 @@ import Navigation from '../components/common/Navigation';
 import { 
   Plus, 
   BookOpen,
-  Users
+  Users,
+  MessageCircle,  // ✨ Added
+  Bell           // ✨ Added
 } from 'lucide-react';
 
 const Index = () => {
@@ -88,8 +90,8 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Quick Actions */}
-        <div className="grid grid-cols-1 gap-6 mb-8 md:grid-cols-3">
+        {/* Quick Actions - ✨ UPDATED WITH CHAT */}
+        <div className="grid grid-cols-1 gap-6 mb-8 md:grid-cols-2 lg:grid-cols-4">
           <button 
             onClick={() => navigate('/posts')}
             className="p-6 transition-all border bg-white/80 rounded-pinterest-lg shadow-pinterest hover:shadow-pinterest-hover hover:scale-105 border-brand-200/30"
@@ -120,12 +122,28 @@ const Index = () => {
             </div>
           </button>
 
+          {/* ✨ NEW: Chat Quick Action */}
+          <button 
+            onClick={() => navigate('/chat')}
+            className="p-6 transition-all border bg-white/80 rounded-pinterest-lg shadow-pinterest hover:shadow-pinterest-hover hover:scale-105 border-brand-200/30"
+          >
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-500 rounded-pinterest">
+                <MessageCircle className="w-6 h-6 text-white" />
+              </div>
+              <div className="text-left">
+                <h3 className="text-lg font-semibold text-brand-600">Messages</h3>
+                <p className="text-sm text-brand-500/70">Chat with students</p>
+              </div>
+            </div>
+          </button>
+
           <button 
             onClick={() => setIsCreatePostModalOpen(true)}
             className="p-6 transition-all border bg-white/80 rounded-pinterest-lg shadow-pinterest hover:shadow-pinterest-hover hover:scale-105 border-brand-200/30"
           >
             <div className="flex items-center space-x-4">
-              <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-500 rounded-pinterest">
+              <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-500 rounded-pinterest">
                 <Plus className="w-6 h-6 text-white" />
               </div>
               <div className="text-left">

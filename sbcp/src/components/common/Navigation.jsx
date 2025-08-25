@@ -17,6 +17,9 @@ import {
   Edit,
   ChevronDown
 } from 'lucide-react';
+// ✅ FIXED: Use default import for websocketService
+import NotificationBell from '../chat/NotificationBell';
+import websocketService from '../../services/websocketService';
 
 const Navigation = ({ onCreatePost, onSearch, searchQuery, setSearchQuery }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -26,6 +29,8 @@ const Navigation = ({ onCreatePost, onSearch, searchQuery, setSearchQuery }) => 
   const user = authService.getCurrentUser();
 
   const handleLogout = () => {
+    // ✨ Disconnect WebSocket on logout
+    websocketService.disconnect();
     authService.logout();
     window.location.href = '/auth';
   };
@@ -53,11 +58,13 @@ const Navigation = ({ onCreatePost, onSearch, searchQuery, setSearchQuery }) => 
     return false;
   };
 
+  // ✨ UPDATED NAV ITEMS WITH CHAT
   const navItems = [
     { path: '/', label: 'Home', icon: Home },
     { path: '/posts', label: 'Posts', icon: BookOpen },
     { path: '/groups', label: 'Groups', icon: Users },
-    { path: '/users/search', label: 'Discover', icon: Search }, // Added user discovery
+    { path: '/chat', label: 'Messages', icon: MessageCircle }, // ✨ NEW
+    { path: '/users/search', label: 'Discover', icon: Search },
   ];
 
   // Profile menu items
@@ -133,13 +140,8 @@ const Navigation = ({ onCreatePost, onSearch, searchQuery, setSearchQuery }) => 
               <span className="font-medium">Create</span>
             </button>
 
-            {/* Notifications */}
-            <button className="p-2 transition-colors text-brand-500 hover:bg-brand-100 rounded-pinterest">
-              <Bell className="w-5 h-5" />
-            </button>
-            <button className="p-2 transition-colors text-brand-500 hover:bg-brand-100 rounded-pinterest">
-              <MessageCircle className="w-5 h-5" />
-            </button>
+            {/* ✨ UPDATED: Notification Bell with WebSocket */}
+            <NotificationBell />
             
             {/* Profile Dropdown Menu */}
             <div className="relative">

@@ -110,3 +110,72 @@ export const apiService = {
     },
   },
 };
+
+// ========================= ✨ NEW: Chat Service =========================
+export const chatService = {
+  // Get chat rooms
+  getChatRooms: async () => {
+    const response = await api.get('/chat/rooms');
+    return response.data;
+  },
+
+  // Send message via REST (fallback)
+  sendMessage: async (messageData) => {
+    const response = await api.post('/chat/send', messageData);
+    return response.data;
+  },
+
+  // Get private chat history
+  getPrivateChatHistory: async (otherUserId, page = 0, size = 20) => {
+    const response = await api.get(`/chat/private/${otherUserId}?page=${page}&size=${size}`);
+    return response.data;
+  },
+
+  // Get group chat history
+  getGroupChatHistory: async (studyGroupId, page = 0, size = 20) => {
+    const response = await api.get(`/chat/group/${studyGroupId}?page=${page}&size=${size}`);
+    return response.data;
+  },
+
+  // Mark messages as read
+  markMessagesAsRead: async (senderId, studyGroupId) => {
+    const response = await api.post('/chat/mark-read', { senderId, studyGroupId });
+    return response.data;
+  },
+
+  // Get notifications
+  getNotifications: async (page = 0, size = 20) => {
+    const response = await api.get(`/notifications?page=${page}&size=${size}`);
+    return response.data;
+  },
+
+  // Get unread notification count
+  getUnreadCount: async () => {
+    const response = await api.get('/notifications/unread-count');
+    return response.data;
+  },
+
+  // Mark notification as read
+  markNotificationAsRead: async (notificationId) => {
+    const response = await api.post(`/notifications/${notificationId}/read`);
+    return response.data;
+  },
+
+  // Mark all notifications as read
+  markAllNotificationsAsRead: async () => {
+    const response = await api.post('/notifications/mark-all-read');
+    return response.data;
+  },
+
+  // Check online status
+  isUserOnline: async (userId) => {
+    const response = await api.get(`/online-status/${userId}`);
+    return response.data;
+  },
+
+  // Check multiple users online status
+  checkUsersOnlineStatus: async (userIds) => {
+    const response = await api.post('/online-status/check', userIds);
+    return response.data;
+  }
+};
